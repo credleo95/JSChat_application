@@ -7,10 +7,9 @@ function App() {
     <div>
       <ChatEngine
         height="100vh"
-        projectID="efc0ad9a-1a89-4149-8461-dc45e9e24dcc
-"
+        projectID="efc0ad9a-1a89-4149-8461-dc45e9e24dcc"
         userName="OmariusC"
-        userSecret="oc27302"
+        userSecret="secret2"
         renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
       />
     </div>

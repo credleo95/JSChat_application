@@ -5,13 +5,13 @@ import { SendOutlined, PictureOutlined } from '@ant-design/icons';
 // logic to write and send messages
 function MessageForm(props) {
   const [messageValue, setMessageValue] = useState('');
-  const { chatId, credentials } = props;
+  const { chatId, creds } = props;
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const text = messageValue.trim();
 
-    if (text.length > 0) sendMessage(credentials, chatId, { text });
+    if (text.length > 0) sendMessage(creds, chatId, { text });
     setMessageValue('');
   };
 
@@ -22,7 +22,7 @@ function MessageForm(props) {
   };
 
   const handleUpload = (event) => {
-    sendMessage(credentials, chatId, { files: event.target.value, text: '' });
+    sendMessage(creds, chatId, { files: event.target.files, text: '' });
   };
 
   return (
