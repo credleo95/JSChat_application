@@ -1,46 +1,68 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-function LoginForm() {
-  const loginFields = {
-    username: '',
-    password: '',
-  };
-  const [loginCreds, setLoginCreds] = useState(loginFields);
+const projectID = 'efc0ad9a-1a89-4149-8461-dc45e9e24dcc';
 
-  const { username, password } = loginCreds;
+const LoginForm = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleChange = (event) => {
-    const { value, name } = event.target;
-    setLoginCreds({ ...loginCreds, [name]: value });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const authObject = {
+      'Project-ID': projectID,
+      'User-Name': username,
+      'User-Secret': password,
+    };
+
+    try {
+      await axios.get('https://api.chatengine.io/chats', {
+        headers: authObject,
+      });
+
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+
+      window.location.reload();
+      setError('');
+    } catch (err) {
+      setError('Oops, incorrect credentials.');
+    }
   };
+
   return (
     <div className="wrapper">
       <div className="form">
-        <h1 className="title"> JS Chat Application</h1>
+        <h1 className="title">Chat Application</h1>
         <form onSubmit={handleSubmit}>
           <input
-            className="input"
             type="text"
-            name="username"
-            placeholder="username"
             value={username}
-            onChange={handleChange}
+            onChange={(e) => setUsername(e.target.value)}
+            className="input"
+            placeholder="Username"
             required
           />
           <input
-            className="input"
             type="password"
-            name="password"
-            placeholder="password"
             value={password}
-            onChange={handleChange}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input"
+            placeholder="Password"
             required
           />
+          <div align="center">
+            <button type="submit" className="button">
+              <span>Start chatting</span>
+            </button>
+          </div>
         </form>
+        <h2>{error}</h2>
       </div>
     </div>
   );
-}
+};
 
 export default LoginForm;
