@@ -6,8 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## This was built using Javascript. The API in use is from [Chatengine.io](chatengine.io) and the application was styled with CSS. 
 
-**Login Credentials to test
-`username:` TestUser1 ** This user is an Admin
+**Login Credentials to test**
+`username:` TestUser1 **This user is an Admin**
 `password:` testpass!234
 
 `username:` TestUser2
